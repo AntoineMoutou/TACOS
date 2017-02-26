@@ -1,0 +1,135 @@
+html,body,header,h1,h2,p{
+  margin: 0;
+  padding: 0;
+}
+html,body{
+  height: 100%;
+}
+header{
+height: 7%;
+width: 100%;
+background-color: rgba(20, 20, 20, 0.3);
+}
+header h1{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+
+}
+header h1 a{
+  color: red;
+  font-family:cursive;
+  text-shadow: 1px 1px white, -1px 1px white, -1px -1px white, 1px -1px white;
+
+  display: block;
+  width:130px;
+
+  text-decoration: underline;
+}
+header h2{
+  color: blue;
+  font-family:sans-serif;
+  font-style: italic;
+  text-shadow: 1px 1px white, -1px 1px white, -1px -1px white, 1px -1px white;
+
+  text-align: center;
+  vertical-align: middle;
+
+  text-decoration: none;;
+}
+footer{
+  height: auto;
+  width: 50%;
+  left:0px;
+  bottom:0px;
+
+  display: flex;
+  justify-content: space-around;
+
+  background-color: rgba(255, 255, 255, 1);
+  border: 1px solid black;
+
+}
+#map{
+  height: 100%;
+  width: 100%;
+}
+#settings{
+  height: 90%;
+  right: 0px;
+  bottom: 3%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border: 1px solid black;
+}
+
+#navigation{
+  height: 10%;
+  background-color: rgba(0, 0, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+#zoom{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 25%;
+  background-color: rgba(0, 255, 255, 0.5);
+
+}
+#photo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 50%;
+  width : 400px;
+  background-color: rgba(255, 0, 255, 0.5);
+
+}
+#texte{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 15%;
+  background-color: rgba(255, 255, 0, 0.5);
+
+  text-align: center;
+
+}
+#latitude{
+  width: 50%;
+  border: 1px solid black;
+  text-align: center;
+
+}
+#longitude{
+  width: 50%;
+  border: 1px solid black;
+  text-align: center;
+
+}
+
+header,#settings,#map,footer{
+  position: fixed;
+}
+header{
+  z-index: 4;
+}
+footer{
+  z-index: 4;
+}
+#settings{
+  z-index: 4;
+}
+#map{
+  z-index: 1;
+}
