@@ -164,7 +164,7 @@ function create_texte_2() {
   // création de l'objet xhr
   var ajax2 = new XMLHttpRequest();
 
-  var url = 'http://127.0.0.1/apigeo.php'
+  var url = 'https://alinko33.000webhostapp.com/apigeo.php'
   data = "lati=" + slati + "&long=" + slong
   url = url + "?" + data
   console.log(url);
