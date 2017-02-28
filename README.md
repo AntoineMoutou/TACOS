@@ -10,4 +10,4 @@ Projet de Programmation Web Avancé : Tweet comme Pesquet.
 
 Les scripts php sont hébergés en ligne.
 
-Pour les utiliser en local, il suffit d'utiliser easyphp ou wamp et de rediriger les requetes sur l'adresse du serveur local dans lequel on aura pris soin de mettre les php.
+Pour les utiliser en local, il suffit d'utiliser easyphp ou wamp et de rediriger les requêtes sur le serveur local pour lequel on aura pris soin de mettre les php dans le dossier "document root" correspondant.
