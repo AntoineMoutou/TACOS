@@ -6,9 +6,13 @@ html,body{
   height: 100%;
 }
 header{
-height: 7%;
-width: 100%;
+height: auto;
+width: 200px;
+margin: 0px 0px 0px -100px;
+
 background-color: rgba(20, 20, 20, 0.3);
+border: 2px solid black;
+border-radius: 10px;
 }
 header h1{
   text-align: center;
@@ -22,9 +26,8 @@ header h1 a{
   text-shadow: 1px 1px white, -1px 1px white, -1px -1px white, 1px -1px white;
 
   display: block;
-  width:130px;
 
-  text-decoration: underline;
+  text-decoration: none;
 }
 header h2{
   color: blue;
@@ -48,14 +51,16 @@ footer{
 
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid black;
+  border-radius: 2px;
 
 }
 #map{
   height: 100%;
   width: 100%;
+  bottom: 0px;
 }
 #settings{
-  height: 90%;
+  height: 87%;
   right: 0px;
   bottom: 3%;
 
@@ -64,6 +69,7 @@ footer{
   justify-content: space-between;
 
   border: 1px solid black;
+  border-radius: 5px;
 }
 
 #navigation{
@@ -122,6 +128,7 @@ header,#settings,#map,footer{
   position: fixed;
 }
 header{
+  left: 50%;
   z-index: 4;
 }
 footer{
