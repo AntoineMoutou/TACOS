@@ -1,7 +1,9 @@
-var mymap, lati, long, lastLati, lastLong, lgMarkers, tacosIcon, polyline, lgPolyline;
+var mymap, lati, long, lastLati, lastLong, lgMarkers, tacosIcon, polyline, lgPolyline, firstConnection, vitesse;
 
 function set_tacos() {
 
+  firstConnection = new Date().getTime();
+  vitesse = 10;
   lati = 0;
   long = 0;
   mymap = L.map('map').setView([lati,long], 3);
@@ -58,6 +60,44 @@ function update_position(){
 
       document.getElementById("latitude").innerHTML = latitude;
       document.getElementById("longitude").innerHTML = longitude;
+
+    }
+
+  });
+
+  // envoi de la requête
+  ajax.send();
+
+}
+
+function update_position_2(){
+
+  // création de l'objet xhr
+  var ajax = new XMLHttpRequest();
+
+  var url = 'https://alinko33.000webhostapp.com/apigeo2.php';
+  data = "time=" + firstConnection + "&vitesse=" + String(vitesse);
+  url = url + "?" + data;
+
+  // destination et type de la requête AJAX (asynchrone ou non)
+  ajax.open('GET', url, true);
+
+  // métadonnées de la requête AJAX
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+  // evenement de changement d'état de la requête
+  ajax.addEventListener('readystatechange',  function(e) {
+    // si l'état est le numéro 4 et que la ressource est trouvée
+    if(ajax.readyState == 4 && ajax.status == 200) {
+      var jsonString = ajax.responseText;
+      //var jsonObj = JSON.parse(jsonString);
+      //var latitude=jsonObj.latitude;
+      //var longitude=jsonObj.longitude;
+
+      //document.getElementById("latitude").innerHTML = latitude;
+      //document.getElementById("longitude").innerHTML = longitude;
+
+      console.log(jsonString);
 
     }
 
@@ -164,10 +204,9 @@ function create_texte_2() {
   // création de l'objet xhr
   var ajax2 = new XMLHttpRequest();
 
-  var url = 'https://alinko33.000webhostapp.com/apigeo.php'
-  data = "lati=" + slati + "&long=" + slong
-  url = url + "?" + data
-  console.log(url);
+  var url = 'https://alinko33.000webhostapp.com/apigeo.php';
+  data = "lati=" + slati + "&long=" + slong;
+  url = url + "?" + data;
 
   // destination et type de la requête AJAX (asynchrone ou non)
   ajax2.open('GET', url, true);
@@ -182,11 +221,6 @@ function create_texte_2() {
 
       var jsonString = ajax2.responseText;
       var jsonObj = JSON.parse(jsonString);
-      console.log(jsonString);
-      console.log(jsonObj);
-
-      var address = 0;
-      console.log(typeof jsonObj.ocean);
 
       if (typeof jsonObj.ocean != 'undefined') {
         document.getElementById("texte").innerHTML = "Hello " + jsonObj.ocean.name + " !";
@@ -209,7 +243,12 @@ function create_texte_2() {
 function main() {
 
   keep_last_position();
-  update_position();
+  if (document.getElementById("cbox2").checked) {
+    update_position_2();
+  }
+  else {
+    update_position();
+  }
   layer_remove_markers();
   if (!(document.getElementById("cbox1").checked)) {
     update_map();
