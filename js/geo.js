@@ -146,7 +146,26 @@ function update_polyline() {
 }
 
 function create_photo() {
-  //Valentine
+
+  lati = parseFloat(document.getElementById("latitude").innerText);
+  long = parseFloat(document.getElementById("longitude").innerText);
+
+  var zoomlist = document.getElementsByName("zoom");
+  var zoom = 3;
+  var bearing = Math.floor(Math.random()*360);
+
+  for (var i = 0; i < zoomlist.length; i++) {
+    if (zoomlist[i].checked) {
+      zoom = zoomlist[i].value;
+    }
+  }
+  console.log(zoom);
+
+  url = "https://api.mapbox.com/v4/mapbox.satellite/"+ long.toString() + ","+ lati.toString() + "," + zoom.toString() + "," + bearing.toString() +"/400x300.jpg?access_token=pk.eyJ1Ijoidm1vbmNoaWV0IiwiYSI6ImNpem1oNGwzajAwMTEzMmsxNmRhdjZnanoifQ.JOr6RgzNPYZ1Zj5baoreBw";
+  console.log(url);
+  //url = "https://api.mapbox.com/v4/mapbox.satellite/"+ long.toString() + ","+ lati.toString() + ",5/300x300.jpg?access_token=pk.eyJ1Ijoidm1vbmNoaWV0IiwiYSI6ImNpem1oNGwzajAwMTEzMmsxNmRhdjZnanoifQ.JOr6RgzNPYZ1Zj5baoreBw";
+  console.log(url);
+  photo = document.getElementById("photo").innerHTML = "<img src='"+url+"' alt='image ISS'/>";
 
 }
 
@@ -222,11 +241,11 @@ function create_texte_2() {
       var jsonString = ajax2.responseText;
       var jsonObj = JSON.parse(jsonString);
 
-      if (typeof jsonObj.ocean != 'undefined') {
-        document.getElementById("texte").innerHTML = "Hello " + jsonObj.ocean.name + " !";
-      }
-      else if (typeof jsonObj.geoname != 'undefined') {
+      if (typeof jsonObj.geoname != 'undefined') {
         document.getElementById("texte").innerHTML = "Hello " + jsonObj.geoname[jsonObj.geoname.length-1].toponymName +", " + jsonObj.geoname[jsonObj.geoname.length-1].countryName + " !";
+      }
+      else if (typeof jsonObj.ocean != 'undefined') {
+        document.getElementById("texte").innerHTML = "Hello " + jsonObj.ocean.name + " !";
       }
       else {
         document.getElementById("texte").innerHTML = "Hello world !";
