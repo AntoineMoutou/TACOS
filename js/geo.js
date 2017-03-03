@@ -1,13 +1,15 @@
-var mymap, lati, long, lastLati, lastLong, lgMarkers, tacosIcon, polyline, lgPolyline, firstConnection, vitesse;
+var mymap, lati, long, lastLati, lastLong, lgMarkers, tacosIcon, polyline, polyline2, lgPolyline, lgPolyline2, firstConnection, vitesse;
 
 function set_tacos() {
 
   firstConnection = new Date().getTime();
-  vitesse = 10;
+  vitesse = 40;
   lati = 0;
   long = 0;
   mymap = L.map('map').setView([lati,long], 3);
   lgMarkers = new L.LayerGroup();
+  lgPolyline = new L.LayerGroup();
+  lgPolyline2 = new L.LayerGroup();
   tacosIcon = L.icon({iconUrl : 'img/tacos2.png',iconSize:[76,48]})
 
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
@@ -22,6 +24,17 @@ function set_button() {
 
   create_photo();
   create_texte_2();
+
+  });
+}
+
+function set_cb() {
+
+  document.getElementById("cbox2").addEventListener("click", function(){
+
+  lastLati = 0;
+  lastLong = 365;
+  console.log("coooooooooool");
 
   });
 }
@@ -76,11 +89,12 @@ function update_position_2(){
   var ajax = new XMLHttpRequest();
 
   var url = 'https://alinko33.000webhostapp.com/apigeo2.php';
+  //var url = 'http://127.0.0.1/apigeo2.php'
   data = "time=" + firstConnection + "&vitesse=" + String(vitesse);
   url = url + "?" + data;
 
   // destination et type de la requête AJAX (asynchrone ou non)
-  ajax.open('GET', url, true);
+  ajax.open('GET', url, false);
 
   // métadonnées de la requête AJAX
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -90,14 +104,14 @@ function update_position_2(){
     // si l'état est le numéro 4 et que la ressource est trouvée
     if(ajax.readyState == 4 && ajax.status == 200) {
       var jsonString = ajax.responseText;
-      //var jsonObj = JSON.parse(jsonString);
-      //var latitude=jsonObj.latitude;
-      //var longitude=jsonObj.longitude;
+      var jsonObj = JSON.parse(jsonString);
+      var latitude = jsonObj.latitude;
+      var longitude = jsonObj.longitude;
 
-      //document.getElementById("latitude").innerHTML = latitude;
-      //document.getElementById("longitude").innerHTML = longitude;
+      document.getElementById("latitude").innerHTML = latitude;
+      document.getElementById("longitude").innerHTML = longitude;
 
-      console.log(jsonString);
+      //console.log(jsonString);
 
     }
 
@@ -133,6 +147,18 @@ function layer_remove_markers() {
 
 }
 
+function layer_remove_polyline() {
+
+  lgPolyline.clearLayers();
+
+}
+
+function layer_remove_polyline_2() {
+
+  lgPolyline2.clearLayers();
+
+}
+
 function update_polyline() {
 
   lati = parseFloat(document.getElementById("latitude").innerText);
@@ -140,7 +166,28 @@ function update_polyline() {
 
   if (lastLong < long) {
     var coord = [new L.LatLng(lastLati, lastLong),new L.LatLng(lati,long)];
-    var polyline = new L.polyline(coord).addTo(mymap);
+    var polyline = new L.polyline(coord).addTo(lgPolyline);
+    mymap.addLayer(lgPolyline);
+  }
+
+}
+
+function update_polyline_2() {
+
+  lati = parseFloat(document.getElementById("latitude").innerText);
+  long = parseFloat(document.getElementById("longitude").innerText);
+
+  console.log(lastLong);
+  console.log(long);
+  console.log(typeof lastLong);
+  console.log(typeof long);
+  console.log(lastLong < long);
+
+  if (lastLong < long) {
+    var coord = [new L.LatLng(lastLati, lastLong),new L.LatLng(lati,long)];
+    var polyline2 = new L.polyline(coord).addTo(lgPolyline2);
+    mymap.addLayer(lgPolyline2);
+    console.log("cool");
   }
 
 }
@@ -261,23 +308,32 @@ function create_texte_2() {
 
 function main() {
 
-  keep_last_position();
   if (document.getElementById("cbox2").checked) {
     update_position_2();
+    layer_remove_polyline();
+    update_polyline_2();
   }
+
   else {
     update_position();
+    layer_remove_polyline_2();
+    update_polyline();
   }
+
   layer_remove_markers();
+
   if (!(document.getElementById("cbox1").checked)) {
     update_map();
   }
+
   update_marker();
-  update_polyline();
+  keep_last_position();
+
 
 }
 
 set_tacos();
 set_button();
+set_cb();
 
-setInterval(main, 3000);
+setInterval(main, 1000);
