@@ -3,7 +3,7 @@ var mymap, lati, long, lastLati, lastLong, lgMarkers, tacosIcon, polyline, polyl
 function set_tacos() {
 
   firstConnection = new Date().getTime();
-  vitesse = 100;
+  vitesse = 40;
   lati = 0;
   long = 0;
   mymap = L.map('map').setView([lati,long], 3);
@@ -84,11 +84,13 @@ function update_position(){
 
 function update_position_2(){
 
+  vitesse = document.getElementById("vitesse").value;
+
   // création de l'objet xhr
   var ajax = new XMLHttpRequest();
 
-  //var url = 'https://alinko33.000webhostapp.com/apigeo2.php';
-  var url = 'http://127.0.0.1/apigeo2.php'
+  var url = 'https://alinko33.000webhostapp.com/apigeo2.php';
+  //var url = 'http://127.0.0.1/apigeo2.php'
   data = "time=" + firstConnection + "&vitesse=" + String(vitesse);
   url = url + "?" + data;
 
@@ -200,12 +202,9 @@ function create_photo() {
       zoom = zoomlist[i].value;
     }
   }
-  console.log(zoom);
 
-  url = "https://api.mapbox.com/v4/mapbox.satellite/"+ long.toString() + ","+ lati.toString() + "," + zoom.toString() + "," + bearing.toString() +"/400x300.jpg?access_token=pk.eyJ1Ijoidm1vbmNoaWV0IiwiYSI6ImNpem1oNGwzajAwMTEzMmsxNmRhdjZnanoifQ.JOr6RgzNPYZ1Zj5baoreBw";
-  console.log(url);
-  //url = "https://api.mapbox.com/v4/mapbox.satellite/"+ long.toString() + ","+ lati.toString() + ",5/300x300.jpg?access_token=pk.eyJ1Ijoidm1vbmNoaWV0IiwiYSI6ImNpem1oNGwzajAwMTEzMmsxNmRhdjZnanoifQ.JOr6RgzNPYZ1Zj5baoreBw";
-  console.log(url);
+  //url = "https://api.mapbox.com/v4/mapbox.satellite/"+ long.toString() + ","+ lati.toString() + "," + zoom.toString() + "," + bearing.toString() +"/400x300.jpg?access_token=pk.eyJ1Ijoidm1vbmNoaWV0IiwiYSI6ImNpem1oNGwzajAwMTEzMmsxNmRhdjZnanoifQ.JOr6RgzNPYZ1Zj5baoreBw";
+  url = "https://api.mapbox.com/styles/v1/mapbox/satellite-v9/static/"+ long.toString() + ","+ lati.toString() + "," + zoom.toString() + ","+ bearing.toString()+"/400x300?access_token=pk.eyJ1Ijoidm1vbmNoaWV0IiwiYSI6ImNpem1oNGwzajAwMTEzMmsxNmRhdjZnanoifQ.JOr6RgzNPYZ1Zj5baoreBw";
   photo = document.getElementById("photo").innerHTML = "<img src='"+url+"' alt='image ISS'/>";
 
 }

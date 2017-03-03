@@ -43,7 +43,6 @@ header("Access-Control-Allow-Headers: Origin");
 
   $rotationTerre = $deltaT / 1000 * 360 / 86400;
   $rotationTerre = fmod($rotationTerre, 360);
-  //echo $rotationTerre;
 
   //$xISS = cos(radian($rotationTerre)) * $xISS - sin(radian($rotationTerre)) * $yISS;
   //$yISS = sin(radian($rotationTerre)) * $xISS + cos(radian($rotationTerre)) * $yISS;
@@ -58,6 +57,7 @@ header("Access-Control-Allow-Headers: Origin");
 
   $latitude = (string) $latitude;
   $longitude = (string) $longitude;
+  $vitesse = (string) $vitesse;
 
-  echo '{"latitude": '.$latitude.', "longitude": '.$longitude.'}';
+  echo '{"latitude": '.$latitude.', "longitude": '.$longitude.', "vitesse": '.$vitesse.'}';
  ?>
