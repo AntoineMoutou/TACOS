@@ -3,7 +3,7 @@ var mymap, lati, long, lastLati, lastLong, lgMarkers, tacosIcon, polyline, polyl
 function set_tacos() {
 
   firstConnection = new Date().getTime();
-  vitesse = 40;
+  vitesse = 100;
   lati = 0;
   long = 0;
   mymap = L.map('map').setView([lati,long], 3);
@@ -34,7 +34,6 @@ function set_cb() {
 
   lastLati = 0;
   lastLong = 365;
-  console.log("coooooooooool");
 
   });
 }
@@ -88,8 +87,8 @@ function update_position_2(){
   // création de l'objet xhr
   var ajax = new XMLHttpRequest();
 
-  var url = 'https://alinko33.000webhostapp.com/apigeo2.php';
-  //var url = 'http://127.0.0.1/apigeo2.php'
+  //var url = 'https://alinko33.000webhostapp.com/apigeo2.php';
+  var url = 'http://127.0.0.1/apigeo2.php'
   data = "time=" + firstConnection + "&vitesse=" + String(vitesse);
   url = url + "?" + data;
 
@@ -104,6 +103,8 @@ function update_position_2(){
     // si l'état est le numéro 4 et que la ressource est trouvée
     if(ajax.readyState == 4 && ajax.status == 200) {
       var jsonString = ajax.responseText;
+
+
       var jsonObj = JSON.parse(jsonString);
       var latitude = jsonObj.latitude;
       var longitude = jsonObj.longitude;
@@ -111,8 +112,7 @@ function update_position_2(){
       document.getElementById("latitude").innerHTML = latitude;
       document.getElementById("longitude").innerHTML = longitude;
 
-      //console.log(jsonString);
-
+      console.log(jsonString);
     }
 
   });
@@ -176,12 +176,6 @@ function update_polyline_2() {
 
   lati = parseFloat(document.getElementById("latitude").innerText);
   long = parseFloat(document.getElementById("longitude").innerText);
-
-  console.log(lastLong);
-  console.log(long);
-  console.log(typeof lastLong);
-  console.log(typeof long);
-  console.log(lastLong < long);
 
   if (lastLong < long) {
     var coord = [new L.LatLng(lastLati, lastLong),new L.LatLng(lati,long)];
