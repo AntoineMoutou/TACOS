@@ -6,14 +6,14 @@ html,body{
   height: 100%;
 }
 header{
-height: auto;
-width: 200px;
-margin: 0px 0px 0px -100px;
+  height: auto;
+  width: 200px;
+  margin: 0px 0px 0px -100px;
 
   background: linear-gradient(to top, rgba(255, 255, 255, 0.5), rgba(100, 100, 100, 0.5));
 
-border: 2px solid black;
-border-radius: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 header h1{
   text-align: center;
@@ -22,25 +22,14 @@ header h1{
 
 }
 header h1 a{
-  color: red;
+  color: rgba(240,190,0,1);
   font-size: 1.2em;
   font-family:sans-serif;
-  text-shadow: 1px 1px white, -1px 1px white, -1px -1px white, 1px -1px white;
+  text-shadow: 1px 1px rgba(174,74,52,1), -1px 1px rgba(174,74,52,1), -1px -1px rgba(174,74,52,1), 1px -1px rgba(174,74,52,1);
 
   display: block;
 
   text-decoration: none;
-}
-header h2{
-  color: blue;
-  font-family:sans-serif;
-  font-style: italic;
-  text-shadow: 1px 1px white, -1px 1px white, -1px -1px white, 1px -1px white;
-
-  text-align: center;
-  vertical-align: middle;
-
-  text-decoration: none;;
 }
 footer{
   height: auto;
@@ -54,7 +43,6 @@ footer{
   background-color: rgba(255, 255, 255, 1);
   border: 1px solid black;
   border-radius: 2px;
-
 }
 #map{
   height: 100%;
@@ -85,6 +73,7 @@ footer{
 #cbox{
     display: flex;
     justify-content: space-around;
+    width: 100%;
   }
 #zoom{
   display: flex;
@@ -92,6 +81,13 @@ footer{
   justify-content: center;
 
   height: 15%;
+}
+#button{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 5%;
 }
 #photo{
   display: flex;
@@ -106,7 +102,7 @@ footer{
   flex-direction: column;
   justify-content: center;
 
-  height: 15%;
+  height: 10%;
   
   text-align: center;
 }
