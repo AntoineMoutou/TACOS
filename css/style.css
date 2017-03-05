@@ -86,6 +86,7 @@ footer{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: -webkit-center;
 
   height: 5%;
 }
